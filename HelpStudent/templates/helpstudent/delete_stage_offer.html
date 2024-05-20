@@ -1,0 +1,5 @@
+<h2>Confirmez-vous la suppression de l'offre "{{ offer.title }}" ?</h2>
+<form method="post">
+    {% csrf_token %}
+    <button type="submit">Confirmer</button>
+</form>

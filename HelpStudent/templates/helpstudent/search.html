@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recherche - Student Help</title>
+</head>
+<body>
+    <h1>Recherche</h1>
+    
+    <h2>Résultats de la recherche</h2>
+    <ul>
+        {% for result in search_results %}
+            <li>{{ result.title }} - {{ result.type }} - {{ result.created_at }}</li>
+            <!-- Ajoutez ici d'autres détails de la publication selon votre modèle de données -->
+        {% empty %}
+            <li>Aucun résultat trouvé.</li>
+        {% endfor %}
+    </ul>
+
+    <!-- Formulaire de recherche -->
+    <h2>Recherchez une publication</h2>
+    <form action="{% url 'search_results' %}" method="GET">
+        <label for="keyword">Mot-clé :</label>
+        <input type="text" id="keyword" name="keyword" required>
+        <button type="submit">Rechercher</button>
+    </form>
+
+</body>
+</html>

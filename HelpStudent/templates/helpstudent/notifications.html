@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestion des notifications - Student Help</title>
+</head>
+<body>
+    <h1>Gestion des notifications</h1>
+    
+    <h2>Notifications</h2>
+    <ul>
+        {% for notification in notifications %}
+            <li>{{ notification.content }}</li>
+            <!-- Ajoutez ici d'autres détails de la notification selon votre modèle de données -->
+        {% empty %}
+            <li>Aucune notification.</li>
+        {% endfor %}
+    </ul>
+
+    <!-- Ajoutez d'autres éléments de gestion des notifications selon les besoins -->
+
+</body>
+</html>

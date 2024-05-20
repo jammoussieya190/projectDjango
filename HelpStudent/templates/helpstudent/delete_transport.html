@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirmation de suppression</title>
+</head>
+<body>
+    <h1>Confirmation de suppression du transport "{{ transport.destination }}"</h1>
+    <p>Êtes-vous sûr de vouloir supprimer ce transport ?</p>
+    <form method="post">
+        {% csrf_token %}
+        <input type="hidden" name="transport_id" value="{{ transport.id }}">
+        <button type="submit">Confirmer la suppression</button>
+    </form>
+</body>
+</html>

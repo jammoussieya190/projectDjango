@@ -1,0 +1,119 @@
+{% block content %}
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Accueil - Help Student</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3/dist/css/bootstrap.min.css" rel="stylesheet">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+
+        <style>
+            .card {
+                margin-bottom: 20px;
+            }
+        </style>
+    </head>
+    <body>
+    
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">Help Student</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="{% url 'index' %}">Accueil</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'transportscl' %}">Transport</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'evenementscl' %}">Événements</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#stage">Stages</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'logementcl' %}">Logement</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'publication_listcl' %}">Publications</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+<section>
+    <article>
+        <div class="main-content">
+            <div class="container">
+                <h1>Liste des offres de stage</h1>  
+            
+                <div class="row">
+                    {% for offer in stage_offers %}
+                    <div class="col-md-4 mb-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ offer.title }}</h5>
+                                <p class="card-text"><strong>Durée:</strong> {{ offer.duration }}</p>
+                                <p class="card-text"><strong>Lieu:</strong> {{ offer.location }}</p>
+                                <p class="card-text"><strong>Description:</strong> {{ offer.description }}</p>
+                                <button class="btn btn-primary" onclick="printOffer('{{ offer.title }}', '{{ offer.duration }}', '{{ offer.location }}', '{{ offer.description }}')">Imprimer</button>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </article>
+    
+    <script>
+        function printOffer(title, duration, location, description) {
+            // Créez le contenu HTML de la carte à imprimer
+            var content = `
+                <h1>${title}</h1>
+                <p><strong>Durée:</strong> ${duration}</p>
+                <p><strong>Lieu:</strong> ${location}</p>
+                <p><strong>Description:</strong> ${description}</p>
+            `;
+    
+            // Créez une nouvelle fenêtre pour imprimer le contenu
+            var printWindow = window.open('', '_blank');
+            printWindow.document.open();
+            printWindow.document.write(`
+                <html>
+                    <head>
+                        <title>Offre de stage</title>
+                        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+                    </head>
+                    <body>
+                        <div class="container">
+                            ${content}
+                        </div>
+                    </body>
+                </html>
+            `);
+            printWindow.document.close();
+    
+            // Attendez que le contenu soit chargé avant d'imprimer
+            printWindow.onload = function() {
+                printWindow.print();
+            };
+        }
+    </script>
+    
+    
+    
+    
+
+</section>
+
+</body>
+</html>
+{% endblock %}

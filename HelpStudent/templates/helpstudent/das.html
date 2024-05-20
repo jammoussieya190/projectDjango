@@ -1,0 +1,37 @@
+<th >
+    
+    <!-- Affichage des publications récentes -->
+    <h2>Publications récentes</h2>
+    <ul>
+        {% for post in recent_posts %}
+            <li>{{ post.title }} - {{ post.author }} - {{ post.created_at }}</li>
+            <!-- Ajoutez ici d'autres détails de publication selon votre modèle de données -->
+        {% empty %}
+            <li>Aucune publication récente.</li>
+        {% endfor %}
+    </ul>
+
+    <!-- Liens vers les différentes catégories de services -->
+    <h2>Services</h2>
+    <ul>
+        <li><a href="{% url 'logement' %}">Logement</a></li>
+        <li><a href="{% url 'transport' %}">Transport</a></li>
+        <li><a href="{% url 'stage' %}">Stages</a></li>
+        <li><a href="{% url 'evenements' %}">Évènements</a></li>
+        <!-- Ajoutez d'autres liens pour d'autres catégories de services si nécessaire -->
+    </ul>
+
+    <!-- Liens vers les publications de l'utilisateur connecté -->
+    <h2>Mes publications</h2>
+    <ul>
+        {% for my_post in user_posts %}
+            <li>{{ my_post.title }} - {{ my_post.created_at }} - <a href="">Modifier</a> - <a href="">Supprimer</a></li>
+            <!-- Ajoutez ici d'autres détails de publication selon votre modèle de données -->
+        {% empty %}
+            <li>Aucune publication.</li>
+        {% endfor %}
+    </ul>
+
+    <!-- Ajoutez d'autres éléments de votre tableau de bord selon les besoins -->
+  </th>
+  

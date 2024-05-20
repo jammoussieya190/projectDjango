@@ -1,0 +1,33 @@
+{% extends "helpstudent/base.html" %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Créer une publication - Student Help</title>
+</head>
+<body>
+    <h1>Créer une publication</h1>
+    
+    <form action="{% url 'create_post' %}" method="POST">
+        {% csrf_token %}
+        <label for="title">Titre :</label>
+        <input type="text" id="title" name="title" required>
+        <label for="description">Description :</label>
+        <textarea id="description" name="description" required></textarea>
+        <!-- Ajoutez ici d'autres champs pour les détails de la publication selon votre modèle de données -->
+        
+        <label for="type">Type de publication :</label>
+        <select id="type" name="type">
+            <option value="0">Offre</option>
+            <option value="1">Demande</option>
+        </select>
+        <!-- Vous pouvez ajouter d'autres options ici selon vos besoins -->
+
+        <button type="submit">Publier</button>
+    </form>
+
+</body>
+</html>
+{% endblock %}
